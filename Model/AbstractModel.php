@@ -118,5 +118,18 @@ abstract class AbstractModel
         return $statement->execute();
     }
 
+    /**
+     * @return bool
+     */
+    public function count(): bool
+    {
+        $sql = $this->queryService->createQuery(
+            QueryBuilderStrategy::Count,
+            ['table' => $this->tableName]
+        );
 
+        $statement = $this->connection->prepare($sql);
+
+        return $statement->execute();
+    }
 }
