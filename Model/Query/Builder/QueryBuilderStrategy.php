@@ -9,7 +9,10 @@ enum QueryBuilderStrategy implements QueryBuilderInterface
     case Update;
     case Delete;
 
-    // Fulfills the interface contract.
+    /**
+     * Fulfills the contract.
+     * @inheritDoc
+     */
     public function build(array $params = []): string
     {
         return match ($this) {
