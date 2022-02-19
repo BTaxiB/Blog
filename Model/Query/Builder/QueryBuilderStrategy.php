@@ -8,6 +8,7 @@ enum QueryBuilderStrategy implements QueryBuilderInterface
     case Show;
     case Update;
     case Delete;
+    case Count;
 
     /**
      * Fulfills the contract.
@@ -20,6 +21,7 @@ enum QueryBuilderStrategy implements QueryBuilderInterface
             QueryBuilderStrategy::Show => (new ShowQueryBuilder())->build($params),
             QueryBuilderStrategy::Update => (new UpdateQueryBuilder())->build($params),
             QueryBuilderStrategy::Delete => (new DeleteQueryBuilder())->build($params),
+            QueryBuilderStrategy::Count => (new CountQueryBuilder())->build($params),
         };
     }
 }
