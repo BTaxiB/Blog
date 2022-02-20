@@ -23,7 +23,6 @@ abstract class AbstractModel
      */
     private QueryServiceInterface $queryService;
 
-
     /**
      * @param PDO $mysqlConnection
      * @param QueryServiceInterface $queryService
