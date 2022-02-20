@@ -24,6 +24,10 @@ abstract class AbstractModel
     private QueryServiceInterface $queryService;
 
 
+    /**
+     * @param PDO $mysqlConnection
+     * @param QueryServiceInterface $queryService
+     */
     public function __construct(PDO $mysqlConnection, QueryServiceInterface $queryService)
     {
         $this->connection = $mysqlConnection;
