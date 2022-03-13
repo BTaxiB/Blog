@@ -15,7 +15,8 @@ try {
     echo $e;
 }
 
-$factory = new EntityFactory(new Context(), $config);
+$contextFilename = sprintf("%s%s", __DIR__, Context::DEFAULT_CONTEXT_FILENAME);
+$factory = new EntityFactory(new Context($contextFilename), $config);
 
 $blog = $factory->createEntity('blog');
 
