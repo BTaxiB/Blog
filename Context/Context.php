@@ -4,16 +4,16 @@ namespace App\Context;
 
 final class Context
 {
-    const CONTEXT_FILE = '/context.json';
+    const DEFAULT_CONTEXT_FILENAME = '/context.json';
     const ERROR_MESSAGE_FORMAT = "Undefined property in context: %s in  %s on line  %s";
     /**
      * @var array|mixed
      */
     protected array $_data;
 
-    public function __construct()
+    public function __construct(string $filename)
     {
-        $load = file_get_contents(sprintf("%s%s", __DIR__, self::CONTEXT_FILE));
+        $load = file_get_contents($filename);
         $this->_data = json_decode($load, true);
     }
 
