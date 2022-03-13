@@ -5,9 +5,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 use App\Context\Context;
 use App\Database\Config;
 use App\Database\EnvException;
-use App\Database\MySQLConnection;
-use App\Model\Blog;
-use App\Model\Query\QueryService;
+use App\Model\Factory\EntityFactory;
 use Dotenv\Dotenv;
 
 $config = new Config(Dotenv::createImmutable(__DIR__));
@@ -17,9 +15,9 @@ try {
     echo $e;
 }
 
-$db = new MySQLConnection($config);
+$factory = new EntityFactory(new Context(), $config);
 
-$blog = new Blog($db, new QueryService(new Context));
+$blog = $factory->createEntity('blog');
 
 $blog->create([
     'title' => 'test',

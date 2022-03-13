@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
-use App\Model\Query\Builder\QueryBuilderStrategy;
-use App\Model\Query\QueryServiceInterface;
+use App\Database\Query\Builder\QueryBuilderStrategy;
+use App\Database\Query\QueryServiceInterface;
 use PDO;
 
 abstract class AbstractModel
@@ -24,11 +24,13 @@ abstract class AbstractModel
     private QueryServiceInterface $queryService;
 
     /**
+     * @param string $tableName
      * @param PDO $mysqlConnection
      * @param QueryServiceInterface $queryService
      */
-    public function __construct(PDO $mysqlConnection, QueryServiceInterface $queryService)
+    public function __construct(string $tableName, PDO $mysqlConnection, QueryServiceInterface $queryService)
     {
+        $this->tableName = $tableName;
         $this->connection = $mysqlConnection;
         $this->queryService = $queryService;
     }
