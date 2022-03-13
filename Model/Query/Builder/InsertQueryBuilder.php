@@ -7,16 +7,9 @@ final class InsertQueryBuilder implements QueryBuilderInterface
     /**
      * @inheritDoc
      */
-    public function build(array $params = []): string
+    public function build(string $tableName, array $params = []): string
     {
-        $tableName = $params['table'];
-        unset($params['table']);
-        return sprintf(
-            "INSERT INTO %s(%s) VALUES(%s)", 
-            $tableName, 
-            $this->buildColumnsString($params), 
-            $this->buildValuesPlaceholderString($params)
-        );
+        return sprintf("INSERT INTO %s(%s) VALUES(%s)", $tableName, $this->buildColumnsString($params), $this->buildValuesPlaceholderString($params));
     }
 
     /**

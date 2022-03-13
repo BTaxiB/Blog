@@ -39,12 +39,8 @@ abstract class AbstractModel
      */
     public function create(array $row): bool
     {
-        $row = array_merge($row, ['table' => $this->tableName]);
-        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Insert, $row);
-        unset($row['table']);
-
+        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Insert, $this->tableName, $row);
         $statement = $this->connection->prepare($sql);
-
         foreach ($row as $key => $value) {
             $statement->bindValue(":$key", $value);
         }
@@ -66,20 +62,10 @@ abstract class AbstractModel
      */
     public function show(int $id): ?array
     {
-        $sql = $this->queryService->createQuery(
-            QueryBuilderStrategy::Show,
-            ['table' => $this->tableName]
-        );
-
+        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Show, $this->tableName);
         $statement = $this->connection->prepare($sql);
-
         $statement->bindValue(":id", $id);
-        $executed = $statement->execute();
-
-        if (!$executed) {
-//            throw
-        }
-
+        $statement->execute();
 
         return $statement->fetch() ?? null;
     }
@@ -91,11 +77,9 @@ abstract class AbstractModel
      */
     public function update(int $id, array $row): bool
     {
-        $row['table'] = $this->tableName;
-        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Update, $row);
-        unset($row['table']);
-
+        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Update, $this->tableName, $row);
         $statement = $this->connection->prepare($sql);
+
         foreach ($row as $key => $value) {
             $statement->bindValue(":$key", $value);
         }
@@ -110,11 +94,7 @@ abstract class AbstractModel
      */
     public function delete(int $id): bool
     {
-        $sql = $this->queryService->createQuery(
-            QueryBuilderStrategy::Delete,
-            ['table' => $this->tableName]
-        );
-
+        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Delete, $this->tableName);
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(":id", $id);
 
@@ -126,13 +106,7 @@ abstract class AbstractModel
      */
     public function count(): bool
     {
-        $sql = $this->queryService->createQuery(
-            QueryBuilderStrategy::Count,
-            ['table' => $this->tableName]
-        );
-
-        $statement = $this->connection->prepare($sql);
-
-        return $statement->execute();
+        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Count, $this->tableName);
+        return $this->connection->prepare($sql)->execute();
     }
 }

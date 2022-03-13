@@ -7,10 +7,8 @@ final class UpdateQueryBuilder implements QueryBuilderInterface
     /**
      * @inheritDoc
      */
-    public function build(array $params = []): string
+    public function build(string $tableName, array $params = []): string
     {
-        $tableName = $params['table'];
-        unset($params['table']);
         return sprintf(
             "UPDATE %s SET %s WHERE id = :id",
             $tableName,

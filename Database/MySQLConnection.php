@@ -7,17 +7,14 @@ use PDOException;
 
 final class MySQLConnection extends PDO
 {
-    private const DATABASE_HOST = 'localhost';
-    private const DATABASE_TYPE = 'mysql';
-
     /**
      * @param Config $config
      */
     public function __construct(Config $config)
     {
         $connectionString = sprintf("%s:host=%s;dbname=%s",
-            self::DATABASE_TYPE,
-            self::DATABASE_HOST,
+            Database::MysqlDatabaseType->getValue(),
+            Database::DatabaseHost->getValue(),
             $config->getDatabaseName()
         );
 

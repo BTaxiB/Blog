@@ -2,8 +2,15 @@
 
 namespace App\Database;
 
+use Dotenv\Dotenv;
+
 final class Config
 {
+    /**
+     * @var Dotenv
+     */
+    private Dotenv $env;
+
     /**
      * @var string
      */
@@ -20,27 +27,33 @@ final class Config
     private string $dbName;
 
     /**
-     * @param array $config
-     * @return void
-     * @throws ConfigException
+     * @param Dotenv $env
      */
-    public function setConfig(array $config): void
+    public function __construct(Dotenv $env)
     {
-        $this->setDatabaseUser($config['dbUser']);
-        $this->setDatabasePassword($config['dbPass']);
-        $this->setDatabaseName($config['dbName']);
+        $this->env = $env;
+        $this->env->load();
     }
 
     /**
-     * @param string $dbUser
-     * @return Config
-     * @throws ConfigException
+     * @return void
+     * @throws EnvException
      */
-    public function setDatabaseUser(string $dbUser): Config
+    public function setConfig(): void
     {
-        $this->dbUser = $dbUser;
-        ConfigException::assertDBUserValueExists($this);
-        return $this;
+        EnvException::assertEnvironmentLoad($this->env);
+        $this->setDatabaseName();
+        $this->setDatabaseUser();
+        $this->setDatabasePassword();
+    }
+
+    /**
+     * @return Config
+     * @throws EnvException
+     */
+    private function setDatabaseUser(): void
+    {
+        $this->dbUser = getenv('DB_USER');
     }
 
     /**
@@ -52,15 +65,12 @@ final class Config
     }
 
     /**
-     * @param mixed $dbPass
      * @return Config
-     * @throws ConfigException
+     * @throws EnvException
      */
-    public function setDatabasePassword(mixed $dbPass): Config
+    private function setDatabasePassword(): void
     {
-        $this->dbPass = $dbPass;
-//        ConfigException::assertDBPasswordValueExists($this);
-        return $this;
+        $this->dbPass = getenv('DB_PASS');
     }
 
     /**
@@ -72,15 +82,12 @@ final class Config
     }
 
     /**
-     * @param string $dbName
      * @return Config
-     * @throws ConfigException
+     * @throws EnvException
      */
-    public function setDatabaseName(string $dbName): Config
+    private function setDatabaseName(): void
     {
-        $this->dbName = $dbName;
-        ConfigException::assertDBNameValueExists($this);
-        return $this;
+        $this->dbName = getenv('DB_NAME');
     }
 
     /**

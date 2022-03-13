@@ -8,8 +8,9 @@ interface QueryServiceInterface
 {
     /**
      * @param QueryBuilderStrategy $strategy
-     * @param array $params
+     * @param string $tableName
+     * @param array $target
      * @return string
      */
-    public function createQuery(QueryBuilderStrategy $strategy, array $params): string;
+    public function createQuery(QueryBuilderStrategy $strategy, string $tableName, array $target = []): string;
 }
