@@ -21,9 +21,10 @@ final class Context
     }
 
     /**
-     * @inheritDoc
+     * @param string $filename
+     * @return array|null
      */
-    public function __get(string $name)
+    public function __get(string $name): ?array
     {
         return $this->offsetGet($name);
     }
