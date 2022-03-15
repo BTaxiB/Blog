@@ -11,6 +11,9 @@ final class Context
      */
     protected array $_data;
 
+    /**
+     * @param string $filename
+     */
     public function __construct(string $filename)
     {
         $load = file_get_contents($filename);
