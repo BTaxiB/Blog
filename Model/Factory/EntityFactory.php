@@ -14,7 +14,7 @@ final class EntityFactory implements EntityFactoryInterface
      * @var Context
      */
     private Context $context;
-    
+
     /**
      * @var Config
      */

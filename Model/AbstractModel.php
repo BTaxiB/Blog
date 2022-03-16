@@ -69,7 +69,7 @@ abstract class AbstractModel
         $statement->bindValue(":id", $id);
         $statement->execute();
 
-        return $statement->fetch() ?? null;
+        return $statement->fetch(PDO::FETCH_ASSOC) ?? null;
     }
 
     /**

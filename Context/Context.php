@@ -11,9 +11,6 @@ final class Context
      */
     protected array $_data;
 
-    /**
-     * @param string $filename
-     */
     public function __construct(string $filename)
     {
         $load = file_get_contents($filename);
@@ -21,10 +18,9 @@ final class Context
     }
 
     /**
-     * @param string $filename
-     * @return array|null
+     * @inheritDoc
      */
-    public function __get(string $name): ?array
+    public function __get(string $name)
     {
         return $this->offsetGet($name);
     }
