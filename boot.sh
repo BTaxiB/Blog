@@ -1,11 +1,12 @@
 mysql < instantiate.sql
 touch .env
 printf "\nDB_NAME = creative \nDB_USER = root \nDB_PASS = " > .env
-echo "--- Installing composer dependencies ---"
+echo "--- VERDANA: Installing composer dependencies ---"
 composer install
 sleep 1
-echo "--- Autoloader check ---"
+echo "--- VERDANA: Autoloader check ---"
 composer dump-autoload -o
-echo "Launching Application test..."
+echo "--- VERDANA: Application test ---"
 sleep 2
+echo "--- VERDANA: Application test results ---"
 php test.php
