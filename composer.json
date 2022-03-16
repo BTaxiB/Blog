@@ -4,6 +4,7 @@
   "autoload": {
     "psr-4": {
       "App\\": "",
+      "App\\Database\\": "/Database",
       "App\\Model\\": "/Model"
     }
   },
@@ -13,5 +14,9 @@
       "name": "BlancoVerdana",
       "email": "webdevelopermiljan@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "ext-pdo": "*",
+    "vlucas/phpdotenv": "^4.2"
+  }
 }
