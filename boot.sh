@@ -1,10 +1,11 @@
 mysql < instantiate.sql
-touch .enve
-printf "\nDB_NAME = creative" >> .enve
-printf "\nDB_USER = root" >> .enve
-printf "\nDB_PASS = " >> .enve
+touch .env
+printf "\nDB_NAME = creative \nDB_USER = root \nDB_PASS = " > .env
+echo "--- Installing composer dependencies ---"
 composer install
+sleep 1
+echo "--- Autoloader check ---"
 composer dump-autoload -o
 echo "Launching Application test..."
-sleep 5
+sleep 2
 php test.php
