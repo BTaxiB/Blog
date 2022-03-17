@@ -2,20 +2,20 @@
 
 namespace App\Database\Query;
 
-use App\Context\Context;
+use App\Context\ContextInterface;
 use App\Database\Query\Builder\QueryBuilderStrategy;
 
 final class QueryService implements QueryServiceInterface
 {
     /**
-     * @var Context
+     * @var ContextInterface
      */
-    private Context $context;
+    private ContextInterface $context;
 
     /**
-     * @param Context $context
+     * @param ContextInterface $context
      */
-    public function __construct(Context $context)
+    public function __construct(ContextInterface $context)
     {
         $this->context = $context;
     }
@@ -35,7 +35,7 @@ final class QueryService implements QueryServiceInterface
      */
     private function getContextMap(array $target, string $tableName): mixed
     {
-        $context = $this->context->$tableName;
+        $context = $this->context->offsetGet($tableName);
         $contextMap = array_keys(array_diff($target, $context));
         $contextMap = array_flip($contextMap);
         return $contextMap;

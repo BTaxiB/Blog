@@ -2,7 +2,7 @@
 
 namespace App\Context;
 
-final class Context
+class Context implements ContextInterface
 {
     const DEFAULT_CONTEXT_FILENAME = '/context.json';
     const ERROR_MESSAGE_FORMAT = "Undefined property in context: %s in  %s on line  %s";
@@ -11,6 +11,9 @@ final class Context
      */
     protected array $_data;
 
+    /**
+     * @param string $filename
+     */
     public function __construct(string $filename)
     {
         $load = file_get_contents($filename);
@@ -18,18 +21,10 @@ final class Context
     }
 
     /**
-     * @inheritDoc
-     */
-    public function __get(string $name)
-    {
-        return $this->offsetGet($name);
-    }
-
-    /**
      * @param string $name
      * @return array|null
      */
-    private function offsetGet(string $name): ?array
+    public function offsetGet(string $name): ?array
     {
         if ($this->offsetExists($name)) {
             return $this->_data[$name];
@@ -47,8 +42,7 @@ final class Context
     }
 
     /**
-     * @param string $name
-     * @return bool
+     * @inheritDoc
      */
     public function offsetExists(string $name): bool
     {
@@ -59,8 +53,7 @@ final class Context
     }
 
     /**
-     * @param string $name
-     * @return void
+     * @inheritDoc
      */
     public function offsetUnset(string $name): void
     {

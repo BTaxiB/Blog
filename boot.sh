@@ -10,3 +10,6 @@ echo "--- VERDANA: Application test ---"
 sleep 2
 echo "--- VERDANA: Application test results ---"
 php test.php
+echo "--- VERDANA: Application unit test ---"
+sleep 2
+./vendor/bin/phpunit --testdox tests
