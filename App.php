@@ -47,6 +47,10 @@ final class App
     {
         $contextKeys = $this->context->getContextKeys();
 
+        if ($contextKeys === null) {
+            throw new AppException("Content is empty, please provide context.");
+        }
+        
         foreach ($contextKeys as $key) {
             $this->entityCollection[$key] = $this->entityFactory->createEntity($key);
         }
@@ -60,7 +64,7 @@ final class App
     public function getEntity(string $entityName): ?Entity
     {
         if (!$this->entityCollection[$entityName]) {
-            throw new AppException(sprintf("Entity with a name %s not found", $entityName));
+            throw new AppException(sprintf("Entity with a name %s not found.", $entityName));
         }
 
         return $this->entityCollection[$entityName];
