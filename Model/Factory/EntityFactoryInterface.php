@@ -9,6 +9,7 @@ interface EntityFactoryInterface
     /**
      * @param string $entityName
      * @return Entity
+     * @throws EntityFactoryException
      */
     public function createEntity(string $entityName): Entity;
 }

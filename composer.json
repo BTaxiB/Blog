@@ -4,8 +4,11 @@
   "autoload": {
     "psr-4": {
       "App\\": "",
+      "App\\Context\\": "/Context",
       "App\\Database\\": "/Database",
-      "App\\Model\\": "/Model"
+      "App\\Model\\": "/Model",
+      "App\\Repository\\": "/Repository",
+      "App\\Translation\\": "/Translation"
     }
   },
   "license": "BlancoVerdana",

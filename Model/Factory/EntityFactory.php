@@ -36,7 +36,7 @@ final class EntityFactory implements EntityFactoryInterface
     public function createEntity(string $entityName): Entity
     {
         if (!$this->context->offsetExists($entityName)) {
-            throw new EntityFactoryException(sprintf("Cannot create entity, scope not found within the context."));
+            throw new EntityFactoryException("Cannot create entity, scope not found within the context.");
         }
 
         return new Entity(

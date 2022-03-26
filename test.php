@@ -3,14 +3,14 @@
 require_once __DIR__ . "/vendor/autoload.php";
 
 use App\App;
-
-$blog = App::createEntity('blogs');
+$app = new App;
+$blog = $app->getEntity('blogs');
 
 $blog->create([
     'created_at' => date('Y-m-d H:i:s'),
     'title' => 'test',
     'description' => 'testDesc',
-    'content_1' => 'TEST',
+    'paragraph_1' => 'TEST',
 ]);
 echo "Created BLOG!" . PHP_EOL;
 $id = $blog->lastInsertId();
@@ -19,7 +19,7 @@ $blog->update($id, [
     'updated_at' => date('Y-m-d H:i:s'),
     'title' => 'testupdate',
     'description' => 'upodatee',
-    'content_1' => 'sadsadsdsa',
+    'paragraph_1' => 'sadsadsdsa',
 ]);
 echo "Updated BLOG!" . PHP_EOL;
 

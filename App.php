@@ -26,22 +26,44 @@ final class App
      */
     private EntityFactory $entityFactory;
 
+    /**
+     * @var Entity[]
+     */
+    private array $entityCollection;
+
     public function __construct()
     {
         $this->config = new Config(Dotenv::createImmutable(__DIR__));
         $this->config->setConfig();
         $this->context = new Context(sprintf("%s%s", __DIR__, Context::DEFAULT_CONTEXT_FILENAME));
         $this->entityFactory = new EntityFactory($this->context, $this->config);
+        $this->loadEntities();
+    }
+
+    /**
+     * @throws EntityFactoryException
+     */
+    private function loadEntities(): void
+    {
+        $contextKeys = $this->context->getContextKeys();
+
+        foreach ($contextKeys as $key) {
+            $this->entityCollection[$key] = $this->entityFactory->createEntity($key);
+        }
     }
 
     /**
      * @param string $entityName
-     * @return Entity
-     * @throws EntityFactoryException
+     * @return Entity|null
+     * @throws AppException
      */
-    public static function createEntity(string $entityName): Entity
+    public function getEntity(string $entityName): ?Entity
     {
-        return (new self)->entityFactory->createEntity($entityName);
+        if (!$this->entityCollection[$entityName]) {
+            throw new AppException(sprintf("Entity with a name %s not found", $entityName));
+        }
+
+        return $this->entityCollection[$entityName];
     }
 }
 

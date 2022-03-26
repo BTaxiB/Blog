@@ -59,4 +59,16 @@ class Context implements ContextInterface
     {
         unset($this->_data[$name]);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getContextKeys(): ?array
+    {
+        if (count($this->_data) > 0) {
+            return array_keys($this->_data);
+        }
+
+        return null;
+    }
 }

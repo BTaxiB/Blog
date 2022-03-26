@@ -3,10 +3,10 @@
     "id",
     "title",
     "description",
-    "content_1",
-    "content_2",
-    "content_3",
-    "content_4",
+    "paragraph_1",
+    "paragraph_2",
+    "paragraph_3",
+    "paragraph_4",
     "meta",
     "created_at",
     "updated_at"
@@ -27,5 +27,12 @@
     "id_blog",
     "created_at",
     "updated_at"
+  ],
+  "content_translation_map": [
+    "id",
+    "id_blog",
+    "field_name",
+    "language_type",
+    "content"
   ]
 }

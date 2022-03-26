@@ -21,4 +21,9 @@ interface ContextInterface
      * @return void
      */
     public function offsetUnset(string $name): void;
+
+    /**
+     * @return string[]|null
+     */
+    public function getContextKeys(): ?array;
 }
