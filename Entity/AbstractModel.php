@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Entity;
 
 use App\Database\Query\Builder\QueryBuilderStrategy;
 use App\Database\Query\QueryServiceInterface;
@@ -60,9 +60,9 @@ abstract class AbstractModel
 
     /**
      * @param int $id
-     * @return array|null
+     * @return array|null|false
      */
-    public function show(int $id): ?array
+    public function show(int $id): mixed
     {
         $sql = $this->queryService->createQuery(QueryBuilderStrategy::Show, $this->tableName);
         $statement = $this->connection->prepare($sql);
@@ -70,6 +70,18 @@ abstract class AbstractModel
         $statement->execute();
 
         return $statement->fetch(PDO::FETCH_ASSOC) ?? null;
+    }
+
+    /**
+     * @return array
+     */
+    public function all(): array
+    {
+        $sql = $this->queryService->createQuery(QueryBuilderStrategy::Catalog, $this->tableName);
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

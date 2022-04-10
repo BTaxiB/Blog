@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Model\Entity;
+use App\Entity\Entity;
 use PDO;
 
 class CMSRepository implements CMSRepositoryInterface

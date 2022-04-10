@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model\Factory;
+namespace App\Entity\Factory;
 
-use App\Model\Entity;
+use App\Entity\Entity;
 
 interface EntityFactoryInterface
 {

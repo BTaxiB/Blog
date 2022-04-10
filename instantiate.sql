@@ -1,5 +1,5 @@
-CREATE DATABASE creatives;
-USE creatives;
+CREATE DATABASE testview;
+USE testview;
 
 CREATE TABLE blogs
 (

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Model\Factory;
+namespace App\Entity\Factory;
 
 use App\Context\Context;
 use App\Database\Config;
 use App\Database\MySQLConnection;
 use App\Database\Query\QueryService;
-use App\Model\Entity;
+use App\Entity\Entity;
 
 final class EntityFactory implements EntityFactoryInterface
 {

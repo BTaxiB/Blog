@@ -2,6 +2,8 @@
 
 namespace App\Database\Query\Builder;
 
+use App\Database\Query\QueryEnum;
+
 final class UpdateQueryBuilder implements QueryBuilderInterface
 {
     /**
@@ -10,7 +12,7 @@ final class UpdateQueryBuilder implements QueryBuilderInterface
     public function build(string $tableName, array $params = []): string
     {
         return sprintf(
-            "UPDATE %s SET %s WHERE id = :id",
+            QueryEnum::Update->getValue(),
             $tableName,
             $this->buildSetValuesString($params)
         );
