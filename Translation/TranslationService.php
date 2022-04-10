@@ -23,7 +23,7 @@ final class TranslationService implements TranslationServiceInterface
     /**
      * @inheritDoc
      */
-    public function translateContent(int $idBlog, string $language, string $target): ?string
+    public function translateContent(int $idBlog, string $language, string $target): string
     {
         return $this->blogContentTranslator->translate($idBlog, $language, $target);
     }

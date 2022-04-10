@@ -2,6 +2,8 @@
 
 namespace App\Database\Query\Builder;
 
+use App\Database\Query\QueryEnum;
+
 final class CountQueryBuilder implements QueryBuilderInterface
 {
     /**
@@ -9,6 +11,6 @@ final class CountQueryBuilder implements QueryBuilderInterface
      */
     public function build(string $tableName, array $params = []): string
     {
-        return sprintf("SELECT COUNT(id) FROM %s", $tableName);
+        return sprintf(QueryEnum::Count->getValue(), $tableName);
     }
 }

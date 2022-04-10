@@ -2,6 +2,8 @@
 
 namespace App\Database\Query\Builder;
 
+use App\Database\Query\QueryEnum;
+
 final class InsertQueryBuilder implements QueryBuilderInterface
 {
     /**
@@ -9,7 +11,12 @@ final class InsertQueryBuilder implements QueryBuilderInterface
      */
     public function build(string $tableName, array $params = []): string
     {
-        return sprintf("INSERT INTO %s(%s) VALUES(%s)", $tableName, $this->buildColumnsString($params), $this->buildValuesPlaceholderString($params));
+        return sprintf(
+            QueryEnum::Insert->getValue(),
+            $tableName,
+            $this->buildColumnsString($params),
+            $this->buildValuesPlaceholderString($params)
+        );
     }
 
     /**

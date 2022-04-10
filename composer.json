@@ -6,9 +6,10 @@
       "App\\": "",
       "App\\Context\\": "/Context",
       "App\\Database\\": "/Database",
-      "App\\Model\\": "/Model",
+      "App\\Entity\\": "/Entity",
       "App\\Repository\\": "/Repository",
-      "App\\Translation\\": "/Translation"
+      "App\\Translation\\": "/Translation",
+      "Client\\": "/Client"
     }
   },
   "license": "BlancoVerdana",

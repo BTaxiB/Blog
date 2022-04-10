@@ -10,14 +10,14 @@ final class QueryService implements QueryServiceInterface
     /**
      * @var ContextInterface
      */
-    private ContextInterface $context;
+    private ContextInterface $contextMap;
 
     /**
      * @param ContextInterface $context
      */
     public function __construct(ContextInterface $context)
     {
-        $this->context = $context;
+        $this->contextMap = $context;
     }
 
     /**
@@ -25,19 +25,19 @@ final class QueryService implements QueryServiceInterface
      */
     public function createQuery(QueryBuilderStrategy $strategy, string $tableName, array $target = []): string
     {
-        $context = $this->getContextMap($target, $tableName);
+        $context = $this->getContext($target, $tableName);
         return $strategy->build($tableName, $context);
     }
 
     /**
+     * @param array $target
      * @param string $tableName
-     * @return mixed
+     * @return array
      */
-    private function getContextMap(array $target, string $tableName): mixed
+    private function getContext(array $target, string $tableName): array
     {
-        $context = $this->context->offsetGet($tableName);
-        $contextMap = array_keys(array_diff($target, $context));
-        $contextMap = array_flip($contextMap);
-        return $contextMap;
+        $contextMap = $this->contextMap->offsetGet($tableName);
+        $context = array_keys(array_diff($target, $contextMap));
+        return array_flip($context);
     }
 }

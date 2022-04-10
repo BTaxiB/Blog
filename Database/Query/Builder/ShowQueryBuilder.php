@@ -2,6 +2,8 @@
 
 namespace App\Database\Query\Builder;
 
+use App\Database\Query\QueryEnum;
+
 final class ShowQueryBuilder implements QueryBuilderInterface
 {
     /**
@@ -9,6 +11,6 @@ final class ShowQueryBuilder implements QueryBuilderInterface
      */
     public function build(string $tableName, array $params = []): string
     {
-        return sprintf("SELECT * FROM %s WHERE id = :id LIMIT 1", $tableName);
+        return sprintf(QueryEnum::Show->getValue(), $tableName);
     }
 }

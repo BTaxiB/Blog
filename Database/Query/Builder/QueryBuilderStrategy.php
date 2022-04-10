@@ -4,6 +4,7 @@ namespace App\Database\Query\Builder;
 
 enum QueryBuilderStrategy implements QueryBuilderInterface
 {
+    case Catalog;
     case Insert;
     case Show;
     case Update;
@@ -11,12 +12,13 @@ enum QueryBuilderStrategy implements QueryBuilderInterface
     case Count;
 
     /**
-     * Enum fulfills the QueryBuilder contract.
+     * QueryBuilderStrategy enum fulfills the QueryBuilder contract.
      * @inheritDoc
      */
     public function build(string $tableName, array $params = []): string
     {
         return match ($this) {
+            QueryBuilderStrategy::Catalog => (new CatalogQueryBuilder())->build($tableName, $params),
             QueryBuilderStrategy::Insert => (new InsertQueryBuilder())->build($tableName, $params),
             QueryBuilderStrategy::Show => (new ShowQueryBuilder())->build($tableName, $params),
             QueryBuilderStrategy::Update => (new UpdateQueryBuilder())->build($tableName, $params),
