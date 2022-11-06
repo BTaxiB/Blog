@@ -1,0 +1,38 @@
+{
+  "blogs": [
+    "id",
+    "title",
+    "description",
+    "paragraph_1",
+    "paragraph_2",
+    "paragraph_3",
+    "paragraph_4",
+    "meta",
+    "created_at",
+    "updated_at"
+  ],
+  "blog_comments": [
+    "id",
+    "title",
+    "user",
+    "content",
+    "approved",
+    "id_blog",
+    "created_at",
+    "updated_at"
+  ],
+  "blog_rating": [
+    "id",
+    "rating",
+    "id_blog",
+    "created_at",
+    "updated_at"
+  ],
+  "content_translation_map": [
+    "id",
+    "id_blog",
+    "field_name",
+    "language",
+    "content"
+  ]
+}
