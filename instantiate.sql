@@ -1,5 +1,5 @@
-CREATE DATABASE testview;
-USE testview;
+CREATE DATABASE testviewssss;
+USE testviewssss;
 
 CREATE TABLE blogs
 (
@@ -47,13 +47,13 @@ CREATE TABLE blog_rating
 
 CREATE TABLE content_translation_map
 (
-    id            INT(11)   NOT NULL AUTO_INCREMENT,
-    field_name    VARCHAR(15)  DEFAULT NULL,
-    language_type VARCHAR(3)   DEFAULT NULL,
-    content       VARCHAR(500) DEFAULT NULL,
-    id_blog       INT(11)      DEFAULT NULL,
-    created_at    TIMESTAMP NOT NULL,
-    updated_at    TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id         INT(11)   NOT NULL AUTO_INCREMENT,
+    field_name VARCHAR(15)  DEFAULT NULL,
+    language   VARCHAR(3)   DEFAULT NULL,
+    content    VARCHAR(500) DEFAULT NULL,
+    id_blog    INT(11)      DEFAULT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id_blog)
         REFERENCES blogs (id)

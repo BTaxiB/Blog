@@ -4,7 +4,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 
 use App\ApplicationFacade;
 $app = new ApplicationFacade;
-$blog = $app->getEntity('blogs');
+$blog = $app->getModel('blogs');
 
 $blog->create([
     'created_at' => date('Y-m-d H:i:s'),
