@@ -28,17 +28,24 @@ final class ApplicationFacade
      */
     public function __construct()
     {
-        $config = new Config(Dotenv::createImmutable(__DIR__));
+        $rootDir = dirname(__DIR__);
+        $config = new Config(Dotenv::createImmutable($rootDir));
         $context = new ContextMap(sprintf(
             "%s%s%s",
-            __DIR__,
+            $rootDir,
             ContextMap::CONTEXT_PATH,
             ContextMap::MODEl_CONTEXT_FILENAME
         ));
 
+        /**
+         * Load models based on provided context.
+         */
         $this->modelContainer = new ModelContainer($config, $context);
         $this->modelContainer->loadModelsFromContext();
 
+        /**
+         * Instantiate services needed for facade. TODO Dependency Injection Container
+         */
         $this->serviceProvider = new ServiceProvider();
         $this->serviceProvider->boot(
             BlogEntityService::class,
