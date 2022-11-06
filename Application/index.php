@@ -2,9 +2,9 @@
 
 require_once "../../vendor/autoload.php";
 
-use App\Application\Api\ApiEnum;
-use App\Application\Api\ApiHandler;
-use App\Application\Api\Exception\ApiException;
+use App\Application\Api\Domain\ApiEnum;
+use App\Application\Api\Domain\Exception\ApiException;
+use App\Application\Api\Infrastructure\ApiHandler;
 use Symfony\Component\HttpFoundation\Request;
 
 $request = Request::createFromGlobals();
