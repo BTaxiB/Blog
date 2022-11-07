@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use App\ApplicationFacade;
+use App\Application\ApplicationFacade;
 $app = new ApplicationFacade;
 $blog = $app->getModel('blogs');
 
