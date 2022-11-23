@@ -1,0 +1,30 @@
+blog:
+  path:     /blog
+  controller: App\Controller\BlogController::index
+  methods:    GET
+
+view_blog:
+  path: /blog/show/{id}
+  controller: App\Controller\BlogController::show
+  methods: GET
+  requirements:
+    id: '[0-9]+'
+
+add_blog:
+  path:     /blog/create
+  controller: App\Controller\BlogController::create
+  methods:    GET
+
+update_blog:
+  path: /blog/update/{id}
+  controller: App\Controller\BlogController::update
+  methods: GET
+  requirements:
+    id: '[0-9]+'
+
+delete_blog:
+  path:     /blog/delete/{id}
+  controller: App\Controller\BlogController::delete
+  methods:    GET
+  requirements:
+    id: '[0-9]+'

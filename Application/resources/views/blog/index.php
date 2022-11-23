@@ -58,7 +58,6 @@ ob_start();
             $html[] = "</tbody>";
         }
 
-
         foreach ($html as $block) {
             echo $block;
         }
