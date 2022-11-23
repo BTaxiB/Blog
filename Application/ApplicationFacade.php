@@ -11,8 +11,14 @@ use App\Infrastructure\Database\Domain\Configuration\Config;
 use App\Infrastructure\Facade\ServiceProvider;
 use App\Infrastructure\Model\Model;
 use App\Infrastructure\Model\ModelContainer;
+use App\Infrastructure\Route\RouteService;
 use App\Infrastructure\Service\BlogEntityService;
 use Dotenv\Dotenv;
+use Exception;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
 
 final class ApplicationFacade
 {
@@ -21,6 +27,9 @@ final class ApplicationFacade
 
     /** @var ServiceProvider */
     private ServiceProvider $serviceProvider;
+
+    /** @var string|RouteCollection */
+    private string|RouteCollection $routes;
 
     /**
      * @throws ModelOutOfContextException
@@ -37,20 +46,44 @@ final class ApplicationFacade
             ContextMap::MODEl_CONTEXT_FILENAME
         ));
 
-        /**
-         * Load models based on provided context.
-         */
+        /** Load models based on provided context. */
         $this->modelContainer = new ModelContainer($config, $context);
         $this->modelContainer->loadModelsFromContext();
 
-        /**
-         * Instantiate services needed for facade. TODO Dependency Injection Container
-         */
+        /** Instantiate services needed for facade. */
         $this->serviceProvider = new ServiceProvider();
         $this->serviceProvider->boot(
             BlogEntityService::class,
             new BlogEntityService($this->modelContainer)
         );
+
+        $routeService = new RouteService();
+        $this->routes = $routeService->load(
+            dirname(__DIR__),
+            '/Application/resources/routes.yaml'
+        );
+    }
+
+    public function run()
+    {
+        try {
+            $context = new RequestContext('/');
+            $request = Request::createFromGlobals();
+            $context->fromRequest($request);
+            $matcher = new UrlMatcher(
+                $this->routes,
+                $context
+            );
+            $parameters = $matcher->match($context->getPathInfo());
+
+            $controllerInfo = explode('::', $parameters['_controller']);
+            $controller = new $controllerInfo[0];
+            $action = $controllerInfo[1];
+            $controller->$action();
+            exit;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     /**
@@ -90,7 +123,7 @@ final class ApplicationFacade
 
     /**
      * @param int $amount
-     * 
+     *
      * @return void
      * @throws ModelNotFoundException
      */

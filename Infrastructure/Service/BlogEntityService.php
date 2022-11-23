@@ -21,7 +21,7 @@ final class BlogEntityService extends AbstractService implements BlogEntityServi
 
     /** @var Model */
     private Model $blogEntity;
-// TODO import API
+
     /**
      * @param ModelContainerInterface $entitySet
      * @throws ModelOutOfContextException
