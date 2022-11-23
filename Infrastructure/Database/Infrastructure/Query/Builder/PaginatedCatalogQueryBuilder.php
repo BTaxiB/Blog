@@ -2,16 +2,18 @@
 
 namespace App\Infrastructure\Database\Infrastructure\Query\Builder;
 
-use App\Infrastructure\Database\Domain\Query\QueryBuilderInterface;
 use App\Infrastructure\Database\Domain\Query\QueryCollection;
 
-final class PaginatedCatalogQueryBuilder implements QueryBuilderInterface
+final class PaginatedCatalogQueryBuilder
 {
     /**
-     * @inheritDoc
+     * @param string $tableName
+     * @param array $params
+     *
+     * @return string
      */
-    public function build(string $tableName, array $params = []): string
+    public function __invoke(string $tableName, array $params = []): string
     {
-        return sprintf(QueryCollection::PaginatedCatalog->getValue(), $tableName, $params['limit'], $params['offset']);
+        return sprintf(QueryCollection::PaginatedCatalog->getValue(), $tableName);
     }
 }

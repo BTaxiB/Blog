@@ -126,6 +126,29 @@ class QueryServiceTest extends TestCase
         $this->assertEquals($expectedResult, $actualResult);
     }
 
+    public function testPaginatedCatalogQueryBuild()
+    {
+        $expectedResult = "SELECT * FROM blogs LIMIT :limit OFFSET :offset";
+        $insertQueryBuilderMock = $this
+            ->getMockBuilder(QueryBuilderInterface::class)
+            ->onlyMethods(['build'])
+            ->getMock();
+        $insertQueryBuilderMock->method('build')->willReturn($expectedResult);
+
+        $contextMock = $this
+            ->getMockBuilder(ContextMapInterface::class)
+            ->onlyMethods(['offsetGet'])
+            ->getMockForAbstractClass();
+        $contextMock
+            ->method('offsetGet')
+            ->with(BlogEntityService::BLOG_ENTITY_NAME)
+            ->willReturn(self::BLOG_CONTEXT);
+
+        $sut = new QueryBuilderHandler($contextMock);
+        $actualResult = $sut->createQuery(QueryBuilderStrategy::PaginatedCatalog, BlogEntityService::BLOG_ENTITY_NAME);
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
     public function testShowQueryBuild()
     {
         $expectedResult = "SELECT * FROM blogs WHERE id = :id LIMIT 1";

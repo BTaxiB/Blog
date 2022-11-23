@@ -6,7 +6,7 @@ enum QueryCollection: string
 {
     /** DQL **/
     case Catalog = 'SELECT * FROM %s';
-    case PaginatedCatalog = 'SELECT * FROM %s LIMIT %d OFFSET %d';
+    case PaginatedCatalog = 'SELECT * FROM %s LIMIT :limit OFFSET :offset';
     case Show = 'SELECT * FROM %s WHERE id = :id LIMIT 1';
     case Count = 'SELECT COUNT(id) FROM %s';
 
