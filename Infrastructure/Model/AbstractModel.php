@@ -132,11 +132,13 @@ abstract class AbstractModel
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function count(): bool
+    public function count(): int
     {
         $sql = $this->queryService->createQuery(QueryBuilderStrategy::Count, $this->tableName);
-        return $this->connection->prepare($sql)->execute();
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchColumn();
     }
 }

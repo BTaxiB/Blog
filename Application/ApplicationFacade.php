@@ -10,8 +10,10 @@ use App\Infrastructure\Context\ContextMap;
 use App\Infrastructure\Context\ContextMapInterface;
 use App\Infrastructure\Database\Domain\Configuration\Config;
 use App\Infrastructure\Facade\ServiceProvider;
+use App\Infrastructure\Facade\ServiceProviderInterface;
 use App\Infrastructure\Model\Model;
 use App\Infrastructure\Model\ModelContainer;
+use App\Infrastructure\Model\ModelContainerInterface;
 use App\Infrastructure\Route\RouteService;
 use App\Infrastructure\Service\BlogEntityService;
 use Dotenv\Dotenv;
@@ -23,11 +25,11 @@ use Symfony\Component\Routing\RouteCollection;
 
 final class ApplicationFacade
 {
-    /** @var ModelContainer */
-    private ModelContainer $modelContainer;
+    /** @var ModelContainerInterface */
+    private ModelContainerInterface $modelContainer;
 
-    /** @var ServiceProvider */
-    private ServiceProvider $serviceProvider;
+    /** @var ServiceProviderInterface */
+    private ServiceProviderInterface $serviceProvider;
 
     /** @var string|RouteCollection */
     private string|RouteCollection $routes;
@@ -66,6 +68,7 @@ final class ApplicationFacade
     }
 
     /**
+     * WIP, not tested yet when fully integrated.
      * @return void
      */
     public function run(): void
@@ -119,7 +122,10 @@ final class ApplicationFacade
     public function getBlogService(): BlogEntityServiceInterface
     {
         if (!$this->serviceProvider->has(BlogEntityService::class)) {
-            throw new ApplicationFacadeException(sprintf("Service [%s] not found.", BlogEntityService::class));
+            throw new ApplicationFacadeException(sprintf(
+                "Service [%s] not found.",
+                BlogEntityService::class
+            ));
         }
 
         return $this->serviceProvider->get(BlogEntityService::class);

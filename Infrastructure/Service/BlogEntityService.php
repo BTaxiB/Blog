@@ -43,6 +43,8 @@ final class BlogEntityService extends AbstractService implements BlogEntityServi
      */
     public function getBlogsWithPagination(): array
     {
+        $blogPages = null;
+
         $limit = getenv(self::RECORDS_PER_PAGE);
         if (!$limit) {
             throw new BlogServiceException("Check environment database pagination options.");

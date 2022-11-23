@@ -7,7 +7,10 @@ use App\Infrastructure\Database\Domain\Query\QueryCollection;
 final class ShowQueryBuilder
 {
     /**
-     * @inheritDoc
+     * @param string $tableName
+     * @param array $params
+     *
+     * @return string
      */
     public function __invoke(string $tableName, array $params = []): string
     {

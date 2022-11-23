@@ -8,7 +8,9 @@ final class DeleteQueryBuilder
 {
     /**
      * @param string $tableName
-     * @inheritDoc
+     * @param array $params
+     *
+     * @return string
      */
     public function __invoke(string $tableName, array $params = []): string
     {
