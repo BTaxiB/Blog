@@ -7,6 +7,7 @@ use App\Domain\Exception\ModelNotFoundException;
 use App\Domain\Exception\ModelOutOfContextException;
 use App\Domain\Service\Blog\BlogEntityServiceInterface;
 use App\Infrastructure\Context\ContextMap;
+use App\Infrastructure\Context\ContextMapInterface;
 use App\Infrastructure\Database\Domain\Configuration\Config;
 use App\Infrastructure\Facade\ServiceProvider;
 use App\Infrastructure\Model\Model;
@@ -42,8 +43,8 @@ final class ApplicationFacade
         $context = new ContextMap(sprintf(
             "%s%s%s",
             $rootDir,
-            ContextMap::CONTEXT_PATH,
-            ContextMap::MODEl_CONTEXT_FILENAME
+            ContextMapInterface::CONTEXT_PATH,
+            ContextMapInterface::MODEl_CONTEXT_FILENAME
         ));
 
         /** Load models based on provided context. */
@@ -64,7 +65,10 @@ final class ApplicationFacade
         );
     }
 
-    public function run()
+    /**
+     * @return void
+     */
+    public function run(): void
     {
         try {
             $context = new RequestContext('/');
@@ -127,7 +131,7 @@ final class ApplicationFacade
      * @return void
      * @throws ModelNotFoundException
      */
-    public function blogDatabaseSeed(int $amount)
+    public function blogDatabaseSeed(int $amount): void
     {
         $blogEntity = $this->modelContainer->get(BlogEntityService::BLOG_ENTITY_NAME);
         for ($i = 0; $i < $amount; $i++) {
