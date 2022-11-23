@@ -3,10 +3,9 @@
   "description": "Blog app",
   "autoload": {
     "psr-4": {
-      "App\\": "",
-      "App\\Infrastructure\\": "/infra",
-      "App\\Domain\\": "/domain",
-      "Client\\": "/app"
+      "App\\Infrastructure\\": "/Infrastructure",
+      "App\\Domain\\": "/Domain",
+      "Client\\": "/Application"
     }
   },
   "license": "BlancoVerdana",
